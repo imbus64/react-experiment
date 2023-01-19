@@ -11,16 +11,11 @@ function App() {
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (stored.length > 0) {
-      // console.log("READ", stored);
-      setTodos(stored);
-      console.log("LOADED: ", todos);
-    }
+    if (stored) setTodos(stored)
   }, []);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
-    console.log("Writing")
   }, [todos])
 
   function toggleTodo(id) {
@@ -36,7 +31,6 @@ function App() {
     setTodos(prevTodos => {
       return [...prevTodos, { id: uuidv4(), name: name, complete: false }]
     })
-    // console.log(name);
     todoNameRef.current.value = null;
   }
 
